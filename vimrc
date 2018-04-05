@@ -145,9 +145,6 @@ set complete=.,b,u,t
 " complete using a popup menu, show a preview
 set completeopt=menu,preview
 
-" sets the title when run in terminal
-" set title
-
 " keeps three lines before/after cursor when scrolling
 set scrolloff=3
 
@@ -166,7 +163,6 @@ set tags+=gems.tags
 let g:gutentags_ctags_executable_ruby = 'ripper-tags\ --extra=+q'
 
 " sets the shell
-" set it to sh for S P E E D
 set sh=/bin/bash\ -l
 
 " turn on syntax highlighting
@@ -176,12 +172,6 @@ syn on
 set foldmethod=indent "fold based on indent
 set foldnestmax=3 "deepest fold is 3 levels
 set nofoldenable "dont fold by default
-
-" BufExplorer
-"nnoremap <silent> B :BufExplorer<CR>
-
-" QuickBuf
-let g:qb_hotkey = "B"
 
 " automatically reload on external file change
 set autoread
@@ -198,9 +188,9 @@ set spell
 " drop-down menu of spelling suggestions
 nnoremap <leader>z a<C-X><C-S>
 
-" MAKE IT EASY TO UPDATE/RELOAD .vimrc
-nnoremap <leader>s :source $HOME/.vimrc<CR>
-nnoremap <leader>v :e $HOME/.vimrc<CR>
+" MAKE IT EASY TO UPDATE/RELOAD vimrc
+nnoremap <leader>s :source $HOME/.vim/vimrc<CR>
+nnoremap <leader>v :e $HOME/.vim/vimrc<CR>
 
 " quickfix commands
 nnoremap <silent> <leader>m :make! "%"<CR>
@@ -212,9 +202,6 @@ nnoremap <silent> <leader>p :cclose<CR>
 " location list
 nnoremap <silent> <leader>k :lopen<CR>
 nnoremap <silent> <leader>l :lclose<CR>
-
-" use vim-dispatch
-nnoremap <silent> <leader>M :Make "%"<CR>
 
 " save
 noremap <silent> <C-s> :w<CR>
@@ -259,16 +246,7 @@ set includeexpr+=substitute(v:fname,'s$','','g')
 set nosmd
 
 " console color scheme
-" colorscheme lucius_old
-" colorscheme Tomorrow-Night
-" colorscheme iceberg
 colorscheme apprentice
-
-" NERD Tree stuff
-nnoremap <silent> <leader>e :NERDTreeToggle<CR>
-" change directory to wherever the root is
-let NERDTreeChDirMode=2
-let NERDTreeDirArrows=0
 
 " make autotag less chatty
 let g:autotagVerbosityLevel=-1
@@ -298,23 +276,6 @@ nnoremap <silent> <leader>d :Dash!<CR>
 " tab completion
 inoremap <Tab> <C-n>
 
-" Tagbar Config
-let g:tagbar_autoclose = 1
-let g:tagbar_autofocus = 1
-
-" single line cucumber execute
-nnoremap <silent> <Leader>c :exec "make! --lines " . line(".")<CR>
-
-" Ctrl-P Config
-" noremap <silent> <C-o> :CtrlPBuffer<CR>
-
-" don't set the current directory
-let g:ctrlp_working_path_mode = 0
-" don't show hidden files
-let g:ctrlp_show_hidden = 0
-" don't reuse old buffers
-let g:ctrlp_switch_buffer = 0
-
 " Leader-F
 let g:Lf_ShortcutF = '<C-F>'
 
@@ -327,12 +288,6 @@ nmap ga <Plug>(EasyAlign)
 " tilde works like an operator
 set tildeop
 
-" Tube
-let g:tube_terminal = 'iterm'
-
-" Syntastic
-" let g:syntastic_check_on_open = 1 " run syntasic when a file is opened
-
 " don't report trailing spaces on quickfix buffers
 let g:trailertrash_blacklist = ['qf']
 
@@ -343,16 +298,8 @@ set swb=useopen
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
-command! -nargs=0 RDocPreview call RDocRenderBufferToPreview()
-
-function! RDocRenderBufferToPreview()
-  let filename = substitute(bufname("%"), '\.', '_', 'g') . '.html'
-  let rdocoutput = "/tmp/vimrdoc/" . filename
-  call system("github-markup " . bufname("%") . " > " . rdocoutput)
-  call system("open ". rdocoutput)
-endfunction
-
 " Notes!
+" Needs to be moved to a Script
 
 let g:notes_dir = "~/Documents/Notes"
 let g:notes_extension = "txt"

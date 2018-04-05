@@ -12,14 +12,8 @@ set guioptions-=T
 
 syn on
 
-" For File Browser
-" nnoremap <silent> <D-e> :NERDTreeToggle<CR>
-
 " open Explorer
 nnoremap <silent> <D-e> :Exp<CR>
-
-" BufExplorer
-nnoremap <silent> <D-b> :BufExplorer<CR>
 
 " Gundo Undo Visualization
 nnoremap <F5> :GundoToggle<CR>
@@ -38,13 +32,10 @@ nnoremap <silent> <D-n> :noh<CR>
 nnoremap <silent> <D-l> <C-^>
 
 " MAKE IT EASY TO UPDATE/RELOAD .gvimrc
-nnoremap <leader>s :source $HOME/.vimrc<CR>:source $HOME/.gvimrc<CR>
-nnoremap <leader>g :e $HOME/.gvimrc<CR>
+nnoremap <leader>s :source $HOME/.vim/vimrc<CR>:source $HOME/.vim/gvimrc<CR>
+nnoremap <leader>g :e $HOME/.vim/gvimrc<CR>
 
 set completeopt=longest,menuone,preview
-
-" do not show the tabline
-" set showtabline=0
 
 " turn off mouseover balloons
 set noballooneval
