@@ -16,9 +16,9 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-rake', 'v2.0'
 Plug 'tpope/vim-vinegar', 'v1.0'
-Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-bundler', 'v2.1'
 Plug 'tpope/vim-rbenv'
-Plug 'tpope/vim-db', 'v1.1'
+Plug 'tpope/vim-db', 'v1.2'
 Plug 'vim-scripts/tComment', { 'on':  'TComment' }
 Plug 'vim-scripts/matchit.zip'
 Plug 'dmcinnes/ruby_single_test'
@@ -50,15 +50,16 @@ Plug 'Shougo/unite.vim'
 Plug 'terryma/vim-expand-region'
 Plug 'Shougo/denite.nvim'
 Plug 'airblade/vim-localorie'
+Plug 'ronakg/quickr-preview.vim'
 
 " colorschemes
 Plug 'romainl/Apprentice'
 Plug 'cocopon/iceberg.vim'
 Plug 'chriskempson/vim-tomorrow-theme'
-
 Plug 'fent/vim-frozen'
 Plug 'vyshane/vydark-vim-color'
 Plug 'alessandroyorba/despacio'
+Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
@@ -302,9 +303,9 @@ cmap w!! w !sudo tee > /dev/null %
 " Needs to be moved to a Script
 
 let g:notes_dir = "~/Documents/Notes"
-let g:notes_extension = "txt"
+let g:notes_extension = "md"
 let g:notes_ctags_flags = "--langdef=notes --langmap=notes:." .  g:notes_extension . ' --regex-notes="/^# (.*)$/\1/d,note/"'
-let g:notes_index_file = "index.txt"
+let g:notes_index_file = "index.md"
 
 function! UpdateNotesTags()
   " make sure the file is in the notes dir
@@ -313,7 +314,7 @@ function! UpdateNotesTags()
   end
 endfunction
 
-autocmd! BufWritePost *.txt call UpdateNotesTags()
+execute "autocmd! BufWritePost " . g:notes_dir . "/*." . g:notes_extension . " call UpdateNotesTags()"
 execute "set tags+=" . g:notes_dir . "/tags"
 
 " ====================
