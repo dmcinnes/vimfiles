@@ -40,7 +40,6 @@ Plug 'airblade/vim-gitgutter', { 'on':  'GitGutterEnable' }
 Plug 'fatih/vim-go'
 Plug 'benekastah/neomake'
 Plug 'junegunn/vim-easy-align'
-Plug 'EinfachToll/DidYouMean'
 Plug 'wellle/targets.vim'
 Plug 'romainl/vim-qf'
 Plug 'Shougo/vimproc.vim', { 'tag' : 'ver.9.3', 'do' : 'make' }
@@ -65,37 +64,41 @@ call plug#end()
 
 " Unite
 " Buffer Explorer
-let g:unite_source_buffer_time_format = ""
-nnoremap <silent> B :Unite buffer -no-split<CR>
+" let g:unite_source_buffer_time_format = ""
+" nnoremap <silent> B :Unite buffer -no-split<CR>
 " Ctrl-P Replacement
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_selecta'])
-call unite#custom#source('buffer,file,file_rec', 'sorters', 'sorter_selecta')
-noremap <silent> <C-p> :Unite file_rec/async -start-insert -prompt=»\ <CR>
+" call unite#filters#matcher_default#use(['matcher_fuzzy'])
+" call unite#filters#sorter_default#use(['sorter_selecta'])
+" call unite#custom#source('buffer,file,file_rec', 'sorters', 'sorter_selecta')
+" noremap <silent> <C-p> :Unite file_rec/async -start-insert -prompt=»\ <CR>
+" noremap <silent> <C-S-p> :Unite file_rec/async -tab -start-insert -prompt=»\ <CR>
 
 " Denite
 " Buffer Explorer
-" nnoremap <silent> B :Denite buffer -split=no -mode=normal -highlight-matched-char=None -highlight-matched-range=None<CR>
+nnoremap <silent> B :Denite buffer -split=no -mode=normal -highlight-matched-char=None -highlight-matched-range=None<CR>
+" Only show buffers in the project
+" call denite#custom#source('buffer', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
 " Ctrl-P Replacement
-" call denite#custom#source('file_rec', 'matchers', ['matcher_fuzzy'])
-" call denite#custom#source('file_rec', 'sorters', ['sorter_rank'])
-" noremap <silent> <C-p> :Denite file_rec -highlight-matched-char=None -highlight-matched-range=None<CR>
-"
-" call denite#custom#map(
-"       \ 'insert',
-"       \ '<Down>',
-"       \ '<denite:move_to_next_line>',
-"       \ 'noremap'
-"       \)
-" call denite#custom#map(
-"       \ 'insert',
-"       \ '<Up>',
-"       \ '<denite:move_to_previous_line>',
-"       \ 'noremap'
-"       \)
-" call denite#custom#option('_', {
-"       \ 'prompt': '»',
-"       \})
+call denite#custom#source('file_rec', 'matchers', ['matcher_fuzzy'])
+call denite#custom#source('file_rec', 'sorters', ['sorter_rank'])
+noremap <silent> <C-p> :Denite file_rec -split=no -highlight-matched-char=None -highlight-matched-range=None<CR>
+" Allow arrow keys in file selection
+call denite#custom#map(
+      \ 'insert',
+      \ '<Down>',
+      \ '<denite:move_to_next_line>',
+      \ 'noremap'
+      \)
+call denite#custom#map(
+      \ 'insert',
+      \ '<Up>',
+      \ '<denite:move_to_previous_line>',
+      \ 'noremap'
+      \)
+" show the prompt as »
+call denite#custom#option('_', {
+      \ 'prompt': '»',
+      \})
 
 " Airline
 let g:airline_powerline_fonts = 1
@@ -270,9 +273,6 @@ vnoremap <silent> <leader>f "gy:Ggrep g<CR>
 
 " better tcomment map
 noremap <silent> <leader>x :TComment<CR>
-
-" lookup word under cursor in dash
-nnoremap <silent> <leader>d :Dash!<CR>
 
 " tab completion
 inoremap <Tab> <C-n>
