@@ -4,7 +4,7 @@ filetype off
 call plug#begin('~/.vim/plugged')
 
 Plug 'thinca/vim-localrc'
-Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot', 'v3.9.1'
 Plug 'sjl/gundo.vim', { 'on':  'GundoToggle' }
 Plug 'jlanzarotta/bufexplorer' " Need to load this up front or it breaks
 Plug 'tpope/vim-fugitive'
@@ -42,12 +42,12 @@ Plug 'benekastah/neomake'
 Plug 'junegunn/vim-easy-align'
 Plug 'wellle/targets.vim'
 Plug 'romainl/vim-qf'
-Plug 'Shougo/vimproc.vim', { 'tag' : 'ver.9.3', 'do' : 'make' }
-Plug 'Shougo/unite.vim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'Shougo/denite.nvim', '2.1'
 
 " experimental
 Plug 'terryma/vim-expand-region'
-Plug 'Shougo/denite.nvim'
 Plug 'airblade/vim-localorie'
 Plug 'ronakg/quickr-preview.vim'
 
@@ -298,6 +298,19 @@ set swb=useopen
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
+
+" add global projectionist config for golang files
+let g:projectionist_heuristics = {
+      \ '*.go': {
+      \   '*.go': {
+      \       'alternate': '{}_test.go',
+      \       'type': 'source'
+      \   },
+      \   '*_test.go': {
+      \       'alternate': '{}.go',
+      \       'type': 'test'
+      \   },
+      \ }}
 
 " Notes!
 " Needs to be moved to a Script
