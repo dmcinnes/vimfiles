@@ -312,6 +312,11 @@ let g:projectionist_heuristics = {
       \   },
       \ }}
 
+
+" vim-go settings
+" use ctrl-] as normal with ctags
+let g:go_def_mapping_enabled = 0
+
 " Notes!
 " Needs to be moved to a Script
 
