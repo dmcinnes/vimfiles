@@ -4,7 +4,7 @@ filetype off
 call plug#begin('~/.vim/plugged')
 
 Plug 'thinca/vim-localrc'
-Plug 'sheerun/vim-polyglot', 'v3.9.1'
+Plug 'sheerun/vim-polyglot', 'v3.9.2'
 Plug 'sjl/gundo.vim', { 'on':  'GundoToggle' }
 Plug 'jlanzarotta/bufexplorer' " Need to load this up front or it breaks
 Plug 'tpope/vim-fugitive'
