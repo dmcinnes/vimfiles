@@ -50,6 +50,8 @@ Plug 'Shougo/denite.nvim', '2.1'
 Plug 'terryma/vim-expand-region'
 Plug 'airblade/vim-localorie'
 Plug 'ronakg/quickr-preview.vim'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 
 " colorschemes
 Plug 'romainl/Apprentice'
@@ -114,6 +116,13 @@ filetype plugin indent on
 " more trouble than they're worth, really
 set nobackup
 set noswapfile
+" but protect against crash-during-write by saving to a separate file and
+" replacing the old
+set writebackup
+
+" persist the undo tree for each file
+set undofile
+set undodir^=~/.vim/undo//
 
 " turn off search highlighting
 " (which neovim makes a default for some reason)
