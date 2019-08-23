@@ -7,7 +7,7 @@ Plug 'thinca/vim-localrc'
 Plug 'sheerun/vim-polyglot', 'v3.9.2'
 Plug 'sjl/gundo.vim', { 'on':  'GundoToggle' }
 Plug 'jlanzarotta/bufexplorer' " Need to load this up front or it breaks
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive', 'v3.0'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-git', 'vim7.4'
 Plug 'tpope/vim-rails', 'v5.4'
@@ -29,29 +29,25 @@ Plug 'gregsexton/gitv'
 Plug 'sunaku/vim-ruby-minitest'
 Plug 'scrooloose/syntastic'
 Plug 'joeytwiddle/git_shade.vim'
-Plug 'vim-airline/vim-airline', 'v0.10'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'paranoida/vim-airlineish'
 Plug 'Shougo/neocomplcache.vim'
 Plug 'csexton/trailertrash.vim'
 Plug 'Keithbsmiley/investigate.vim'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
 Plug 'airblade/vim-gitgutter', { 'on':  'GitGutterEnable' }
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', 'v1.20'
 Plug 'benekastah/neomake'
 Plug 'junegunn/vim-easy-align'
 Plug 'wellle/targets.vim'
-Plug 'romainl/vim-qf'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'Shougo/denite.nvim', '2.1'
+Plug 'Shougo/denite.nvim', '3.0'
 
 " experimental
 Plug 'terryma/vim-expand-region'
 Plug 'airblade/vim-localorie'
-Plug 'ronakg/quickr-preview.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'itchyny/lightline.vim'
 
 " colorschemes
 Plug 'romainl/Apprentice'
@@ -64,26 +60,31 @@ Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
-" Unite
-" Buffer Explorer
-" let g:unite_source_buffer_time_format = ""
-" nnoremap <silent> B :Unite buffer -no-split<CR>
-" Ctrl-P Replacement
-" call unite#filters#matcher_default#use(['matcher_fuzzy'])
-" call unite#filters#sorter_default#use(['sorter_selecta'])
-" call unite#custom#source('buffer,file,file_rec', 'sorters', 'sorter_selecta')
-" noremap <silent> <C-p> :Unite file_rec/async -start-insert -prompt=»\ <CR>
-" noremap <silent> <C-S-p> :Unite file_rec/async -tab -start-insert -prompt=»\ <CR>
-
 " Denite
+" Define mappings
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d
+  \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p
+  \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space>
+  \ denite#do_map('toggle_select').'j'
+endfunction
 " Buffer Explorer
-nnoremap <silent> B :Denite buffer -split=no -mode=normal -highlight-matched-char=None -highlight-matched-range=None<CR>
+nnoremap <silent> B :Denite buffer -split=no -highlight-matched-char=None -highlight-matched-range=None<CR>
 " Only show buffers in the project
 " call denite#custom#source('buffer', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
 " Ctrl-P Replacement
-call denite#custom#source('file_rec', 'matchers', ['matcher_fuzzy'])
-call denite#custom#source('file_rec', 'sorters', ['sorter_rank'])
-noremap <silent> <C-p> :Denite file_rec -split=no -highlight-matched-char=None -highlight-matched-range=None<CR>
+call denite#custom#source('file/rec', 'matchers', ['matcher_fuzzy'])
+call denite#custom#source('file/rec', 'sorters', ['sorter_rank'])
+noremap <silent> <C-p> :Denite file/rec -split=no -highlight-matched-char=None -highlight-matched-range=None<CR>
 " Allow arrow keys in file selection
 call denite#custom#map(
       \ 'insert',
@@ -102,10 +103,12 @@ call denite#custom#option('_', {
       \ 'prompt': '»',
       \})
 
-" Airline
-let g:airline_powerline_fonts = 1
-let g:airline_exclude_preview = 1
-let g:airline_theme = 'tomorrow'
+
+" Lightline
+let g:lightline = {
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+      \ }
 
 " neocomplcache settings
 let g:neocomplcache_disable_auto_complete = 1
@@ -325,6 +328,8 @@ let g:projectionist_heuristics = {
 " vim-go settings
 " use ctrl-] as normal with ctags
 let g:go_def_mapping_enabled = 0
+" show test name in quickfix output
+let g:go_test_show_name = 1
 
 " Notes!
 " Needs to be moved to a Script
