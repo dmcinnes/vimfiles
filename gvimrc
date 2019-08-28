@@ -9,6 +9,8 @@ set antialias
 
 " turn off toolbar
 set guioptions-=T
+" keep the window the same size when adding/removing tabs
+set guioptions+=k
 
 syn on
 
