@@ -330,6 +330,8 @@ let g:projectionist_heuristics = {
 let g:go_def_mapping_enabled = 0
 " show test name in quickfix output
 let g:go_test_show_name = 1
+" also group the imports section on safe
+let g:go_fmt_command = "goimports"
 
 " Notes!
 " Needs to be moved to a Script
