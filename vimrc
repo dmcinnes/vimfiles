@@ -84,7 +84,7 @@ nnoremap <silent> B :Denite buffer -split=no -highlight-matched-char=None -highl
 " Ctrl-P Replacement
 call denite#custom#source('file/rec', 'matchers', ['matcher_fuzzy'])
 call denite#custom#source('file/rec', 'sorters', ['sorter_rank'])
-noremap <silent> <C-p> :Denite file/rec -split=no -highlight-matched-char=None -highlight-matched-range=None<CR>
+noremap <silent> <C-p> :Denite file/rec -split=no -highlight-matched-char=None -highlight-matched-range=None -start-filter<CR>
 " Allow arrow keys in file selection
 call denite#custom#map(
       \ 'insert',
