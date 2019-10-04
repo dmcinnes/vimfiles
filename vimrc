@@ -4,7 +4,7 @@ filetype off
 call plug#begin('~/.vim/plugged')
 
 Plug 'thinca/vim-localrc'
-Plug 'sheerun/vim-polyglot', 'v4.0.2'
+Plug 'sheerun/vim-polyglot', 'v4.0.3'
 Plug 'sjl/gundo.vim', { 'on':  'GundoToggle' }
 Plug 'jlanzarotta/bufexplorer' " Need to load this up front or it breaks
 Plug 'tpope/vim-fugitive', 'v3.0'
@@ -27,14 +27,14 @@ Plug 'bogado/file-line'
 Plug 'int3/vim-extradite'
 Plug 'gregsexton/gitv'
 Plug 'sunaku/vim-ruby-minitest'
-Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic', '3.10.0'
 Plug 'joeytwiddle/git_shade.vim'
 Plug 'Shougo/neocomplcache.vim'
 Plug 'csexton/trailertrash.vim'
 Plug 'Keithbsmiley/investigate.vim'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
-Plug 'airblade/vim-gitgutter', { 'on':  'GitGutterEnable' }
-Plug 'fatih/vim-go', 'v1.20'
+Plug 'airblade/vim-gitgutter' ", { 'on':  'GitGutterEnable' }
+Plug 'fatih/vim-go', 'v1.21'
 Plug 'benekastah/neomake'
 Plug 'junegunn/vim-easy-align'
 Plug 'wellle/targets.vim'
@@ -310,6 +310,10 @@ set swb=useopen
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
+
+" fat-fingered :w
+" -- so it doesn't think I want :Windows in fzf
+cmap W w
 
 " add global projectionist config for golang files
 let g:projectionist_heuristics = {
