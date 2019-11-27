@@ -4,10 +4,10 @@ filetype off
 call plug#begin('~/.vim/plugged')
 
 Plug 'thinca/vim-localrc'
-Plug 'sheerun/vim-polyglot', 'v4.0.3'
+Plug 'sheerun/vim-polyglot', 'v4.1.1'
 Plug 'sjl/gundo.vim', { 'on':  'GundoToggle' }
 Plug 'jlanzarotta/bufexplorer' " Need to load this up front or it breaks
-Plug 'tpope/vim-fugitive', 'v3.0'
+Plug 'tpope/vim-fugitive', 'v3.1'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-git', 'vim7.4'
 Plug 'tpope/vim-rails', 'v5.4'
@@ -334,8 +334,12 @@ let g:projectionist_heuristics = {
 let g:go_def_mapping_enabled = 0
 " show test name in quickfix output
 let g:go_test_show_name = 1
-" also group the imports section on safe
+" also group the imports section on save
 let g:go_fmt_command = "goimports"
+
+" reduce updatetime to 100ms
+" so git-gutter can updates are quick
+set updatetime=100
 
 " Notes!
 " Needs to be moved to a Script
