@@ -4,10 +4,10 @@ filetype off
 call plug#begin('~/.vim/plugged')
 
 Plug 'thinca/vim-localrc'
-Plug 'sheerun/vim-polyglot', 'v4.1.1'
+Plug 'sheerun/vim-polyglot', 'v4.4.3'
 Plug 'sjl/gundo.vim', { 'on':  'GundoToggle' }
 Plug 'jlanzarotta/bufexplorer' " Need to load this up front or it breaks
-Plug 'tpope/vim-fugitive', 'v3.1'
+Plug 'tpope/vim-fugitive', 'v3.2'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-git', 'vim7.4'
 Plug 'tpope/vim-rails', 'v5.4'
@@ -34,13 +34,13 @@ Plug 'csexton/trailertrash.vim'
 Plug 'Keithbsmiley/investigate.vim'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
 Plug 'airblade/vim-gitgutter' ", { 'on':  'GitGutterEnable' }
-Plug 'fatih/vim-go', 'v1.21'
+Plug 'fatih/vim-go', 'v1.23'
 Plug 'benekastah/neomake'
 Plug 'junegunn/vim-easy-align'
 Plug 'wellle/targets.vim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'Shougo/denite.nvim', '3.0'
+Plug 'Shougo/denite.nvim', '3.2'
 
 " experimental
 Plug 'terryma/vim-expand-region'
@@ -48,6 +48,7 @@ Plug 'airblade/vim-localorie'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'itchyny/lightline.vim'
+Plug 'vim/killersheep'
 
 " colorschemes
 Plug 'romainl/Apprentice'
@@ -340,6 +341,9 @@ let g:go_fmt_command = "goimports"
 " reduce updatetime to 100ms
 " so git-gutter can updates are quick
 set updatetime=100
+
+" markdown configuration
+let g:vim_markdown_follow_anchor = 1
 
 " Notes!
 " Needs to be moved to a Script
