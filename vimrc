@@ -1,10 +1,9 @@
-set nocompatible
-filetype off
+
 
 call plug#begin('~/.vim/plugged')
 
 Plug 'thinca/vim-localrc'
-Plug 'sheerun/vim-polyglot', 'v4.4.3'
+Plug 'sheerun/vim-polyglot', 'v4.15.1'
 Plug 'sjl/gundo.vim', { 'on':  'GundoToggle' }
 Plug 'jlanzarotta/bufexplorer' " Need to load this up front or it breaks
 Plug 'tpope/vim-fugitive', 'v3.2'
@@ -34,7 +33,7 @@ Plug 'csexton/trailertrash.vim'
 Plug 'Keithbsmiley/investigate.vim'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
 Plug 'airblade/vim-gitgutter' ", { 'on':  'GitGutterEnable' }
-Plug 'fatih/vim-go', 'v1.23'
+Plug 'fatih/vim-go', 'v1.24'
 Plug 'benekastah/neomake'
 Plug 'junegunn/vim-easy-align'
 Plug 'wellle/targets.vim'
@@ -52,12 +51,13 @@ Plug 'vim/killersheep'
 
 " colorschemes
 Plug 'romainl/Apprentice'
-Plug 'cocopon/iceberg.vim'
-Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'fent/vim-frozen'
-Plug 'vyshane/vydark-vim-color'
-Plug 'alessandroyorba/despacio'
-Plug 'arcticicestudio/nord-vim'
+Plug 'adlawson/vim-sorcerer'
+" Plug 'cocopon/iceberg.vim'
+" Plug 'chriskempson/vim-tomorrow-theme'
+" Plug 'fent/vim-frozen'
+" Plug 'vyshane/vydark-vim-color'
+" Plug 'alessandroyorba/despacio'
+" Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
@@ -342,25 +342,46 @@ let g:go_fmt_command = "goimports"
 " so git-gutter can updates are quick
 set updatetime=100
 
+" Hide things link markdown links unless the cursor is over them
+set conceallevel=2
+
 " markdown configuration
 let g:vim_markdown_follow_anchor = 1
 
 " Notes!
 " Needs to be moved to a Script
+"
+" requires universal-ctags https://github.com/universal-ctags/ctags
+"
+" Define a config file in your notes directory:
+" --langdef=markdowntags
+" --languages=markdowntags
+" --langmap=markdowntags:.md
+" --kinddef-markdowntags=t,tag,tags
+" --mline-regex-markdowntags=/(^|[[:space:]])@([a-zA-Z0-9_-]+)/\2/t,tag/{mgroup=1}
 
 let g:notes_dir = "~/Documents/Notes"
-let g:notes_extension = "md"
-let g:notes_ctags_flags = "--langdef=notes --langmap=notes:." .  g:notes_extension . ' --regex-notes="/^# (.*)$/\1/d,note/"'
-let g:notes_index_file = "index.md"
+let g:catalog_extension = "md"
 
 function! UpdateNotesTags()
   " make sure the file is in the notes dir
   if match(bufname("%"), glob(g:notes_dir)) == 0
-    call system("(cd " . g:notes_dir . " ; ctags -R " . g:notes_ctags_flags . "; cut -f 1 tags | grep -v \^\!_ > " . g:notes_index_file . ") &")
+    " update tags
+    call system("(cd " . g:notes_dir . " ; ctags -R) &")
+    " recreate referrals
+    " 1. find the referral blocks and remove them from the end of the files
+    " 2. find references in the tags file that look like links
+    " 3. remove the second :
+    " 4. take only the filename and the link and reverse them
+    " 5. drop any web links
+    " 6. sort
+    " 6. dump each filename on the end of the linked note with a referral
+    " header
+"    call system("(cd " . g:notes_dir . ' ; find . -type f | xargs -I % vim -e -c ''g/^## Referrals$/.-1,$d'' -c ''wq'' % ; grep --exclude-dir .ctags.d -o -n -R "\[[^]]*\]([^)]*" . | sed -E "s/:([0-9]+):/:\1/" | awk -F ''[[(]'' ''{print $3,$1}'' | grep -v "^http" | sort | xargs -L 1 sh -c ''echo "\n## Referrals\n$1" >> ./$0'') &')
   end
 endfunction
 
-execute "autocmd! BufWritePost " . g:notes_dir . "/*." . g:notes_extension . " call UpdateNotesTags()"
+execute "autocmd! BufWritePost " . g:notes_dir . "/*." . g:catalog_extension . " call UpdateNotesTags()"
 execute "set tags+=" . g:notes_dir . "/tags"
 
 " ====================
