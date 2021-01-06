@@ -365,7 +365,7 @@ let g:catalog_extension = "md"
 
 function! UpdateNotesTags()
   " make sure the file is in the notes dir
-  if match(bufname("%"), glob(g:notes_dir)) == 0
+  if stridx(expand("%:p:h"), glob(g:notes_dir)) == 0
     " update tags
     call system("(cd " . g:notes_dir . " ; ctags -R) &")
     " recreate referrals
