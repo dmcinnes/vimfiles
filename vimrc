@@ -3,21 +3,20 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'thinca/vim-localrc'
-Plug 'sheerun/vim-polyglot', 'v4.15.1'
+Plug 'sheerun/vim-polyglot', 'v4.17.0'
 Plug 'sjl/gundo.vim', { 'on':  'GundoToggle' }
 Plug 'jlanzarotta/bufexplorer' " Need to load this up front or it breaks
-Plug 'tpope/vim-fugitive', 'v3.2'
+Plug 'tpope/vim-fugitive', 'v3.4'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-git', 'vim7.4'
 Plug 'tpope/vim-rails', 'v5.4'
-Plug 'tpope/vim-characterize', 'v1.0'
+Plug 'tpope/vim-characterize', 'v1.1'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-rake', 'v2.0'
 Plug 'tpope/vim-vinegar', 'v1.0'
 Plug 'tpope/vim-bundler', 'v2.1'
 Plug 'tpope/vim-rbenv'
-Plug 'tpope/vim-db', 'v1.2'
 Plug 'vim-scripts/tComment', { 'on':  'TComment' }
 Plug 'vim-scripts/matchit.zip'
 Plug 'dmcinnes/ruby_single_test'
@@ -33,13 +32,13 @@ Plug 'csexton/trailertrash.vim'
 Plug 'Keithbsmiley/investigate.vim'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
 Plug 'airblade/vim-gitgutter' ", { 'on':  'GitGutterEnable' }
-Plug 'fatih/vim-go', 'v1.24'
+Plug 'fatih/vim-go', 'v1.25'
 Plug 'benekastah/neomake'
 Plug 'junegunn/vim-easy-align'
 Plug 'wellle/targets.vim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'Shougo/denite.nvim', '3.2'
+Plug 'Shougo/denite.nvim', '3.3'
 
 " experimental
 Plug 'terryma/vim-expand-region'
@@ -47,7 +46,7 @@ Plug 'airblade/vim-localorie'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'vim/killersheep'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " colorschemes
 Plug 'romainl/Apprentice'
@@ -180,7 +179,7 @@ set tags+=gems.tags
 let g:gutentags_ctags_executable_ruby = 'ripper-tags\ --extra=+q'
 
 " sets the shell
-set sh=/bin/bash\ -l
+set sh=/bin/zsh\ -l
 
 " turn on syntax highlighting
 syn on
@@ -244,6 +243,9 @@ nnoremap <silent> <C-a> :A<CR>
 set showmatch
 set matchtime=2
 
+" don't change directories when opening files from external
+set noautochdir
+
 " bufexplorer - show relative paths
 let g:bufExplorerShowRelativePath = 1
 " Do not show default help.
@@ -269,12 +271,12 @@ colorscheme apprentice
 let g:autotagVerbosityLevel=-1
 
 " fugitive key bindings
-nnoremap <silent> <leader>gs :Gstatus<CR>
-nnoremap <silent> <leader>gc :Gcommit<CR>
-nnoremap <silent> <leader>gl :Glog<CR>
+nnoremap <silent> <leader>gs :Git<CR>
+nnoremap <silent> <leader>gc :Git commit<CR>
+nnoremap <silent> <leader>gl :Gclog<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
-nnoremap <silent> <leader>gb :Gblame<CR>
-nnoremap <silent> <leader>gn :Gblame<CR>
+nnoremap <silent> <leader>gb :Git blame<CR>
+nnoremap <silent> <leader>gn :Git blame<CR>
 nnoremap <silent> <leader>gq :Gread<CR>
 nnoremap <silent> <leader>ga :Git add %<CR>
 nnoremap <silent> <leader>gr :Git reset HEAD %<CR>
@@ -407,10 +409,6 @@ au! BufNewFile,BufRead *.md setlocal lbr spell
 " ruby
 au! BufNewFile,BufRead *.{rbw,gem,gemspec,rjs} setf ruby
 au! BufNewFile,BufRead *.{rd,rdoc} setf rdoc
-
-" rspec
-au! BufReadPost,BufNewFile,FileChangedShellPost *_spec.rb setf rspec
-au! BufReadPost,BufNewFile,FileChangedShellPost *_spec.rb compiler rspec
 
 " cucumber
 au! BufNewFile,BufRead *\.feature set makeprg=cucumber\ --format\ progress\ %
