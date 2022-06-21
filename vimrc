@@ -3,10 +3,10 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'thinca/vim-localrc'
-Plug 'sheerun/vim-polyglot', 'v4.17.0'
+Plug 'sheerun/vim-polyglot'
 Plug 'sjl/gundo.vim', { 'on':  'GundoToggle' }
 Plug 'jlanzarotta/bufexplorer' " Need to load this up front or it breaks
-Plug 'tpope/vim-fugitive', 'v3.4'
+Plug 'tpope/vim-fugitive', 'v3.7'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-git', 'vim7.4'
 Plug 'tpope/vim-rails', 'v5.4'
@@ -32,77 +32,24 @@ Plug 'csexton/trailertrash.vim'
 Plug 'Keithbsmiley/investigate.vim'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
 Plug 'airblade/vim-gitgutter' ", { 'on':  'GitGutterEnable' }
-Plug 'fatih/vim-go', 'v1.25'
+Plug 'fatih/vim-go', 'v1.26'
 Plug 'benekastah/neomake'
 Plug 'junegunn/vim-easy-align'
 Plug 'wellle/targets.vim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'Shougo/denite.nvim', '3.3'
+Plug 'itchyny/lightline.vim'
 
 " experimental
 Plug 'terryma/vim-expand-region'
 Plug 'airblade/vim-localorie'
 Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'itchyny/lightline.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'ctrlpvim/ctrlp.vim'
 
 " colorschemes
 Plug 'romainl/Apprentice'
 Plug 'adlawson/vim-sorcerer'
-" Plug 'cocopon/iceberg.vim'
-" Plug 'chriskempson/vim-tomorrow-theme'
-" Plug 'fent/vim-frozen'
-" Plug 'vyshane/vydark-vim-color'
-" Plug 'alessandroyorba/despacio'
-" Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
-
-" Denite
-" Define mappings
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-  nnoremap <silent><buffer><expr> <CR>
-  \ denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> d
-  \ denite#do_map('do_action', 'delete')
-  nnoremap <silent><buffer><expr> p
-  \ denite#do_map('do_action', 'preview')
-  nnoremap <silent><buffer><expr> q
-  \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> i
-  \ denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> <Space>
-  \ denite#do_map('toggle_select').'j'
-endfunction
-" Buffer Explorer
-nnoremap <silent> B :Denite buffer -split=no -highlight-matched-char=None -highlight-matched-range=None<CR>
-" Only show buffers in the project
-" call denite#custom#source('buffer', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
-" Ctrl-P Replacement
-call denite#custom#source('file/rec', 'matchers', ['matcher_fuzzy'])
-call denite#custom#source('file/rec', 'sorters', ['sorter_rank'])
-noremap <silent> <C-p> :Denite file/rec -split=no -highlight-matched-char=None -highlight-matched-range=None -start-filter<CR>
-" Allow arrow keys in file selection
-call denite#custom#map(
-      \ 'insert',
-      \ '<Down>',
-      \ '<denite:move_to_next_line>',
-      \ 'noremap'
-      \)
-call denite#custom#map(
-      \ 'insert',
-      \ '<Up>',
-      \ '<denite:move_to_previous_line>',
-      \ 'noremap'
-      \)
-" show the prompt as »
-call denite#custom#option('_', {
-      \ 'prompt': '»',
-      \})
-
 
 " Lightline
 let g:lightline = {
@@ -200,6 +147,9 @@ set shiftround
 
 " turn on spell check
 set spell
+
+" Buffer Explorer
+nnoremap <silent> B :BufExplorer<CR>
 
 " drop-down menu of spelling suggestions
 nnoremap <leader>z a<C-X><C-S>
