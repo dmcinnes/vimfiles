@@ -6,16 +6,16 @@ Plug 'thinca/vim-localrc'
 Plug 'sheerun/vim-polyglot'
 Plug 'sjl/gundo.vim', { 'on':  'GundoToggle' }
 Plug 'jlanzarotta/bufexplorer' " Need to load this up front or it breaks
-Plug 'tpope/vim-fugitive', 'v3.7'
+Plug 'tpope/vim-fugitive', { 'tag': 'v*' }
 Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-git', 'vim7.4'
-Plug 'tpope/vim-rails', 'v5.4'
-Plug 'tpope/vim-characterize', 'v1.1'
+Plug 'tpope/vim-git', { 'tag': 'vim*' }
+Plug 'tpope/vim-rails', { 'tag': 'v*' }
+Plug 'tpope/vim-characterize', { 'tag': 'v*' }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-projectionist'
-Plug 'tpope/vim-rake', 'v2.0'
-Plug 'tpope/vim-vinegar', 'v1.0'
-Plug 'tpope/vim-bundler', 'v2.1'
+Plug 'tpope/vim-rake', { 'tag': 'v*' }
+Plug 'tpope/vim-vinegar', { 'tag': 'v*' }
+Plug 'tpope/vim-bundler', { 'tag': 'v*' }
 Plug 'tpope/vim-rbenv'
 Plug 'vim-scripts/tComment', { 'on':  'TComment' }
 Plug 'vim-scripts/matchit.zip'
@@ -25,25 +25,27 @@ Plug 'bogado/file-line'
 Plug 'int3/vim-extradite'
 Plug 'gregsexton/gitv'
 Plug 'sunaku/vim-ruby-minitest'
-Plug 'scrooloose/syntastic', '3.10.0'
+Plug 'scrooloose/syntastic', { 'tag': '*' }
 Plug 'joeytwiddle/git_shade.vim'
 Plug 'Shougo/neocomplcache.vim'
 Plug 'csexton/trailertrash.vim'
 Plug 'Keithbsmiley/investigate.vim'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
 Plug 'airblade/vim-gitgutter' ", { 'on':  'GitGutterEnable' }
-Plug 'fatih/vim-go', 'v1.26'
+Plug 'fatih/vim-go', { 'tag': '*' }
 Plug 'benekastah/neomake'
 Plug 'junegunn/vim-easy-align'
 Plug 'wellle/targets.vim'
 Plug 'itchyny/lightline.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " experimental
 Plug 'terryma/vim-expand-region'
 Plug 'airblade/vim-localorie'
 Plug '/usr/local/opt/fzf'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'kana/vim-textobj-user', '0.7.6'
+Plug 'tek/vim-textobj-ruby'
 
 " colorschemes
 Plug 'romainl/Apprentice'
@@ -59,6 +61,9 @@ let g:lightline = {
 
 " neocomplcache settings
 let g:neocomplcache_disable_auto_complete = 1
+
+" Start CtrlP from cwd
+let g:ctrlp_working_path_mode = 'rw'
 
 " load ftplugins and indent files
 filetype plugin indent on
