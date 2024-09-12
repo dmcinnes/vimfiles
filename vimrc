@@ -15,37 +15,35 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-rake', { 'tag': 'v*' }
 Plug 'tpope/vim-vinegar', { 'tag': 'v*' }
-Plug 'tpope/vim-bundler', { 'tag': 'v*' }
 Plug 'tpope/vim-rbenv'
 Plug 'vim-scripts/tComment', { 'on':  'TComment' }
 Plug 'vim-scripts/matchit.zip'
 Plug 'dmcinnes/ruby_single_test'
-Plug 'dmcinnes/vim-QuickFixMessage'
 Plug 'bogado/file-line'
 Plug 'int3/vim-extradite'
 Plug 'gregsexton/gitv'
 Plug 'sunaku/vim-ruby-minitest'
-Plug 'scrooloose/syntastic', { 'tag': '*' }
+" Plug 'scrooloose/syntastic', { 'tag': '3.*' }
 Plug 'joeytwiddle/git_shade.vim'
 Plug 'Shougo/neocomplcache.vim'
 Plug 'csexton/trailertrash.vim'
 Plug 'Keithbsmiley/investigate.vim'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
 Plug 'airblade/vim-gitgutter' ", { 'on':  'GitGutterEnable' }
-Plug 'fatih/vim-go', { 'tag': '*' }
+Plug 'fatih/vim-go', { 'tag': 'v*' }
 Plug 'benekastah/neomake'
 Plug 'junegunn/vim-easy-align'
 Plug 'wellle/targets.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'ctrlpvim/ctrlp.vim'
-
-" experimental
-Plug 'terryma/vim-expand-region'
-Plug 'airblade/vim-localorie'
-Plug '/usr/local/opt/fzf'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'kana/vim-textobj-user', '0.7.6'
 Plug 'tek/vim-textobj-ruby'
+
+" experimental
+Plug 'dense-analysis/ale', { 'tag': 'v3.*' }
+Plug 'terryma/vim-expand-region'
+Plug 'airblade/vim-localorie'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " colorschemes
 Plug 'romainl/Apprentice'
@@ -177,6 +175,9 @@ nnoremap <silent> <leader>l :lclose<CR>
 " save
 noremap <silent> <C-s> :w<CR>
 
+" yank to system clipboard
+vnoremap <C-c> "*y
+
 " turn off highlighting
 nnoremap <silent> <C-n> :noh<CR>
 
@@ -267,11 +268,11 @@ let g:trailertrash_blacklist = ['qf']
 set swb=useopen
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %
+cabbrev w!! w !sudo tee > /dev/null %
 
 " fat-fingered :w
 " -- so it doesn't think I want :Windows in fzf
-cmap W w
+cabbrev W w
 
 " add global projectionist config for golang files
 let g:projectionist_heuristics = {
@@ -286,6 +287,10 @@ let g:projectionist_heuristics = {
       \   },
       \ }}
 
+" ALE config
+let g:ale_virtualtext_cursor = 'disabled'
+" disable linters for now
+let b:ale_linters = []
 
 " vim-go settings
 " use ctrl-] as normal with ctags
@@ -381,6 +386,7 @@ au! BufNewFile,BufRead *.go setlocal noexpandtab ts=4
 au! FileType * match none
 " au! FileType ruby match ColorColumn /\%>80v.\+/
 
+autocmd BufRead,BufNewFile *_spec.rb compiler rspec
 
 " load local vimrc for extra goodness
 if filereadable(expand("~/.lvimrc"))
