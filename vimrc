@@ -51,12 +51,6 @@ Plug 'adlawson/vim-sorcerer'
 
 call plug#end()
 
-" Lightline
-let g:lightline = {
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-      \ }
-
 " neocomplcache settings
 let g:neocomplcache_disable_auto_complete = 1
 
