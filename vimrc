@@ -25,7 +25,7 @@ Plug 'gregsexton/gitv'
 Plug 'sunaku/vim-ruby-minitest'
 " Plug 'scrooloose/syntastic', { 'tag': '3.*' }
 Plug 'joeytwiddle/git_shade.vim'
-Plug 'Shougo/neocomplcache.vim'
+Plug 'Shougo/neocomplcache.vim', { 'tag': 'ver.*' }
 Plug 'csexton/trailertrash.vim'
 Plug 'Keithbsmiley/investigate.vim'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
