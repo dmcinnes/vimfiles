@@ -40,7 +40,7 @@ Plug 'kana/vim-textobj-user', '0.7.6'
 Plug 'tek/vim-textobj-ruby'
 
 " experimental
-Plug 'dense-analysis/ale', { 'tag': 'v3.*' }
+Plug 'dense-analysis/ale', { 'tag': 'v4.*' }
 Plug 'terryma/vim-expand-region'
 Plug 'airblade/vim-localorie'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -81,6 +81,9 @@ set sw=2
 " make vertical split show up on the right for thing like
 " :AV (╥﹏╥)
 set splitright
+
+" disable modelines as a potential security vector
+set nomodeline
 
 " Set mapleader
 let mapleader = ","
@@ -284,7 +287,9 @@ let g:projectionist_heuristics = {
 " ALE config
 let g:ale_virtualtext_cursor = 'disabled'
 " disable linters for now
-let b:ale_linters = []
+let g:ale_linters = {
+  \   'ruby': ['brakeman', 'cspell', 'debride',  'rubocop', 'ruby', 'solargraph'],
+  \ }
 
 " vim-go settings
 " use ctrl-] as normal with ctags
